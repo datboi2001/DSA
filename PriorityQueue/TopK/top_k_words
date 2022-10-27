@@ -1,0 +1,22 @@
+from collections import defaultdict
+from heapq import heappush, heappop, heapify
+
+class Solution:
+    def topKFrequent(self, words: list[str], k: int) -> list[str]:
+        """
+        :param words: List of words
+        :param k: frequency
+        :return: k most frequent strings. Return the answer sorted by the frequency from highest to lowest. 
+        If two words have the same frequency, then the word with the lower alphabetical order comes first.
+        """
+        if len(words) == 1:
+            return [words[0]]
+        counter = defaultdict(int)
+        for word in words:
+            counter[word] -= 1
+        heap = []
+        for word, freq in counter.items():
+            heappush(heap, (freq, word))
+        return [heappop(heap)[1] for _ in range(k)]
+print(Solution().topKFrequent(
+    ["i", "love", "leetcode", "i", "love", "coding"], 2))
