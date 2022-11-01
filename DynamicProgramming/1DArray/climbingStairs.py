@@ -1,9 +1,8 @@
+from functools import cache
 class Solution:
     def climbStairs(self, n: int) -> int:
+        @cache
         def climb_recursion(cur_steps: int, memo: dict[int, int]):
-            # Look for cached result in dictionary
-            if cur_steps in memo:
-                return memo[cur_steps]
             # Add 1 if current_steps equals n
             if cur_steps == n:
                 return 1
@@ -12,7 +11,6 @@ class Solution:
                 return 0
             # Recurrence relation is the number of ways if you start at step 1  + number of ways you start at step 2
             total_ways = climb_recursion(cur_steps + 1, memo) + climb_recursion(cur_steps + 2, memo)
-            memo[cur_steps] = total_ways
             return total_ways
         
         def climb_bottom_up():
