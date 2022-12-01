@@ -1,5 +1,5 @@
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
+    def twoSum(self, numbers: list[int], target: int) -> list[int]:
         l, r = 0, len(numbers) - 1
         while l <= r:
             mid = (l + r) // 2
@@ -9,3 +9,4 @@ class Solution:
                 l += 1
             else:
                 r -= 1
+        return [-1, -1]
