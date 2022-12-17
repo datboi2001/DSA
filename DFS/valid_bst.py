@@ -9,10 +9,12 @@ def valid_bst(root: Node) -> bool:
     # WRITE YOUR BRILLIANT CODE HERE
 
     def bst_utils(node: Node, min_value=float("-inf"), max_value=float("inf")) -> bool:
+        # base case
         if node is None:
+            # if node is None, it is a valid BST
             return True
 
-        if min_value <= node.val <= max_value:
+        if not (min_value <= node.val <= max_value):
             return False
 
         return bst_utils(node.left, min_value, node.val) and bst_utils(node.right, node.val, max_value)

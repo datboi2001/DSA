@@ -4,6 +4,7 @@ class Node:
         self.left = left
         self.right = right
 
+
 def is_balanced(tree: Node) -> bool:
     # WRITE YOUR BRILLIANT CODE HERE
     def tree_height(root: Node) -> int:
@@ -24,10 +25,12 @@ def is_balanced(tree: Node) -> bool:
 
 def build_tree(nodes, f):
     val = next(nodes)
-    if val == 'x': return None
+    if val == 'x':
+        return None
     left = build_tree(nodes, f)
     right = build_tree(nodes, f)
     return Node(f(val), left, right)
+
 
 if __name__ == '__main__':
     tree = build_tree(iter(input().split()), int)
