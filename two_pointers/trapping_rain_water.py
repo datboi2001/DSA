@@ -1,4 +1,3 @@
-from typing import list
 
 def trapping_rain_water(height: list[int]) -> int:
     """

@@ -1,5 +1,7 @@
 class Solution:
     def merge(self, intervals: list[list[int]]) -> list[list[int]]:
+        # Main idea: sort the intervals by the start time. Then iterate through the intervals and check if the current
+        # interval overlaps with the previous interval. If it does, merge the intervals. If it doesn't, add the current
         if len(intervals) == 1:
             return intervals
         result = []
