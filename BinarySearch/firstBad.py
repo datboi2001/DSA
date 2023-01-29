@@ -4,9 +4,8 @@ class Solution:
         l, r = 1, n
         while l <= r:
             mid = (l + r) // 2
-            if isBadVersion(mid) == True:
+            if isBadVersion(mid):
                 l = mid + 1
             else:
                 r = mid
-        print(l, r) 
-                
+        return l

@@ -2,7 +2,13 @@ from functools import cache, lru_cache
 class Solution:
    # Time: O(n * k * target), Space: O(n * target)
     def numRollsToTarget(self, n: int, k: int, target: int) -> int:
-        @lru_cache(maxsize=None)
+        """
+        :param n: number of dice
+        :param k: number of faces
+        :param target: target value
+        :return number of ways to get target value
+        """
+        @cache
         def dp(num_dice: int, total: int):
             if total > target or num_dice > n:
                 return 0
