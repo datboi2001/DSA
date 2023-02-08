@@ -1,6 +1,12 @@
-from heapq import heappop, heappush, heapify
+from heapq import heappop, heappush
 
 class MedianOfStream:
+
+    # Idea: use two heaps, one max heap and one min heap.
+    # The max heap stores the smaller half of the numbers, and the min heap stores the larger half of the numbers.
+    # The max heap and the min heap are balanced, so that the median can be found in O(1) time.
+    # Time complexity: O(logn) for add_number, O(1) for get_median
+    # Space complexity: O(n)
 
     def __init__(self):
         # Max Heap

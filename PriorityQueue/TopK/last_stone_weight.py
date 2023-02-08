@@ -1,26 +1,22 @@
-from queue import PriorityQueue
-
+from heapq import heappush, heappop, heapify
 
 class Solution:
     def lastStoneWeight(self, stones: list[int]) -> int:
-        """
-        We are playing a game with the stones. On each turn, we choose the heaviest two stones and smash them together. Suppose the heaviest two stones have weights x and y with x <= y. The result of this smash is:
-If x == y, both stones are destroyed, and
-If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
-        :param stones: list of stones weight
-        :return: the weight of the last stone. If there are no stones left, return 0.
-        """
-        pq = PriorityQueue()
-        for stone in stones:
-            pq.put(-stone)
-        while pq.qsize() > 1:
-            y = pq.get()
-            x = pq.get()
-            if x != y:
-                pq.put(y - x)
-        if pq.qsize() == 1:
-            return -pq.get()
-        else:
-            return 0
+        if len(stones) == 1:
+            return stones[0]
+        stones = [stone * -1 for stone in stones]
+        heapify(stones)
 
-print(Solution().lastStoneWeight([2, 7, 4, 1, 8, 1]))
+        while stones:
+            y = heappop(stones) * -1
+            x = heappop(stones) * -1
+            if x != y:
+                heappush(stones, (y-x)*-1)
+            if len(stones) == 1:
+                break
+
+        if len(stones) == 0:
+            return 0
+        return stones[0]*-1
+
+print(Solution().lastStoneWeight([1]))
