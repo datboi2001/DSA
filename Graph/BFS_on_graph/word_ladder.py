@@ -16,40 +16,40 @@ class Solution:
         :return: number of words in the shortest transformation sequence from beginWord to endWord
         """
         # WRITE YOUR BRILLIANT CODE HERE
+        # Idea: BFS on the graph. For each word, we create a graph where each node is a word and each edge is a word
+        # that is one edit distance away from the current word. We then do BFS on the graph to find the shortest path
+        # from beginWord to endWord
+        # Time complexity: O(n * m^2) where n is the number of words in wordList and m is the length of each word
+        # Space complexity: O(n * m^2)
 
-        if end not in wordList or not end or not begin or not wordList:
+        # Create a graph where each node is a word and each edge is a word that is one edit distance away from the
+        # current word
+        if end not in wordList:
             return 0
-        # Since all words are of same length.
-        L = len(begin)
-        # Dictionary to hold combination of words that can be formed,
-        # from any given word. By changing one letter at a time.
-        all_combo_dict = defaultdict(list)
-        for word in wordList:
-            for i in range(L):
-                # Key is the generic word
-                # Value is a list of words which have the same intermediate generic word.
-                all_combo_dict[word[:i] + "*" + word[i + 1:]].append(word)
-        # Queue for BFS
-        print(all_combo_dict)
-        queue = deque([(begin, 1)])
+        # Add beginWord to wordList
+        wordList.append(begin)
 
-        # Visited to make sure we don't repeat processing same word.
-        visited = {begin: True}
+        graph = defaultdict(list)
+        for word in wordList:
+            for i in range(len(word)):
+                # Create a new word by replacing each character in word with a *
+                graph[word[:i] + "*" + word[i + 1:]].append(word)
+        
+        # Do BFS on the graph to find the shortest path from beginWord to endWord
+        queue = deque([(begin, 1)])
+        visited = set()
         while queue:
-            current_word, level = queue.popleft()
-            for i in range(L):
-                # Intermediate words for current word
-                intermediate_word = current_word[:i] + "*" + current_word[i + 1:]
-                # Next states are all the words which share the same intermediate state.
-                for word in all_combo_dict[intermediate_word]:
-                    # If at any point if we find what we are looking for
-                    # i.e. the end word - we can return with the answer.
-                    if word == end:
-                        return level + 1
-                    # Otherwise, add it to the BFS Queue. Also mark it visited
-                    if word not in visited:
-                        visited[word] = True
-                        queue.append((word, level + 1))
-                all_combo_dict[intermediate_word] = []
+            word, dist = queue.popleft()
+            # If we have reached the end word, return the distance
+            if word == end:
+                return dist
+            # Add all the words that are one edit distance away from the current word to the queue
+            for i in range(len(word)):
+                # Create a new word by replacing each character in word with a *
+                for w in graph[word[:i] + "*" + word[i + 1:]]:
+                    if w not in visited:
+                        visited.add(w)
+                        queue.append((w, dist + 1))
         return 0
+
 print(Solution().ladderLength("hit", "cog", ["hot","dot","dog","lot","log","cog"]))
