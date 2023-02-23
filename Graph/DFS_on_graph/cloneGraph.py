@@ -20,6 +20,8 @@ class Solution:
         # that node and add it to the dictionary. We also add the neighbors of the current node to the neighbors
         # list of the new node.
 
+        # Time complexity: O(V + E) where V is the number of nodes and E is the number of edges
+        # Space complexity: O(V) where V is the number of nodes
         if not node:
             return None
         if len(node.neighbors) == 0:
@@ -28,11 +30,16 @@ class Solution:
         seen = {}
         # Do a DFS on the graph
         def dfs(node):
+            # If we have already visited the node, return the node corresponding to that node from the dictionary
             if node in seen:
                 return seen[node]
+            # Create a new node for the current node
             new_node = Node(node.val)
+            # Add the new node to the dictionary
             seen[node] = new_node
             for neighbor in node.neighbors:
+                # Add the neighbors of the current node to the neighbors list of the new node
                 new_node.neighbors.append(dfs(neighbor))
+            # Return the new node
             return new_node
         return dfs(node)

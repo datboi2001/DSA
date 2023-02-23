@@ -19,7 +19,6 @@ class Solution:
         return dp[-1]
        
 
-
 if __name__ == '__main__':
     ...
     # s = input()
