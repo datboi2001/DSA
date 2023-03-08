@@ -8,7 +8,7 @@ class Solution:
         # Main idea: use a dictionary to store the anagrams. The key is the sorted string, 
         # and the value is a list of anagrams.
         # Time complexity: O(n)        
-
+        # Space complexity: O(n)
         anagrams = defaultdict(list) 
         for s in strs:
             sorted_s = ''.join(sorted(s))

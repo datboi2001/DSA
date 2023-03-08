@@ -12,9 +12,11 @@ class Solution:
         # Merging overlapping intervals
         result = []
         for interval in intervals:
+            # if the list of merged intervals is empty or if the current
             if not result or result[-1][1] < interval[0]:
                 result.append(interval)
             else:
+                # otherwise, there is overlap, so we merge the current and previous intervals
                 result[-1][1] = max(result[-1][1], interval[1])
         return result
 
