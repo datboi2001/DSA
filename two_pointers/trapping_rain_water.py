@@ -6,9 +6,15 @@ def trapping_rain_water(height: list[int]) -> int:
     :param height: list of heights
     :return: amount of water trapped
     """
+    # Main idea: Two Pointers. We can use two pointers to solve this problem. The main idea is that
+    # if we want to trap water, we need to find the maximum height of the left and right sides. Then
+    # we can trap water on the side that is lower than the other side. We can use two pointers to
+    # find the maximum height of the left and right sides. 
+
     if not height:
         return 0 
     l, r = 0, len(height) - 1
+    # left_max and right_max are the maximum heights of the left and right sides
     l_max, r_max = height[l], height[r]
     water = 0
     while l < r:
