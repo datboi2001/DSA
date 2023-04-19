@@ -18,14 +18,20 @@ def min_path_sum(grid: List[List[int]]) -> int:
         return grid[0][0]
     for i in range(len(grid)):
         for j in range(len(grid[0])):
-            if i == j == 0:
-                continue
-            elif i == 0:
-                grid[i][j] += grid[i][j - 1]
-            elif j == 0:
-                grid[i][j] += grid[i - 1][j]
+            if i == 0 and j == 0:
+                continue 
             else:
-                grid[i][j] += min(grid[i - 1][j], grid[i][j - 1])
+                # The minimum sum at each step is the minimum of the sum of the current cell and the sum of the cell
+                # above it or the sum of the current cell and the sum of the cell to the left of it
+                # If we are at the first row, we can only move right
+                if i == 0:
+                    grid[i][j] += grid[i][j - 1]
+                # If we are at the first column, we can only move down
+                elif j == 0:
+                    grid[i][j] += grid[i-1][j]
+                # If we are not at the first row or the first column, we can move either right or down
+                else:
+                    grid[i][j] += min(grid[i-1][j], grid[i][j-1])
     return grid[-1][-1]
 
 if __name__ == '__main__':
