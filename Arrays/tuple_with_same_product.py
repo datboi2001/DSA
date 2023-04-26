@@ -23,5 +23,6 @@ class Solution:
                 # If the product is 6, then product_dict[6] = 1
                 ans += product_dict.get(product, 0)
                 product_dict[product] += 1
+        # Answer is 8 * ans because we are counting the same tuple 8 times
         return 8 * ans
 print(Solution().tupleSameProduct([2,3,4,6]))
