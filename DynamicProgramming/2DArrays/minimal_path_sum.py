@@ -22,7 +22,7 @@ def min_path_sum(grid: List[List[int]]) -> int:
                 continue 
             else:
                 # The minimum sum at each step is the minimum of the sum of the current cell and the sum of the cell
-                # above it or the sum of the current cell and the sum of the cell to the left of it
+                0# above it or the sum of the current cell and the sum of the cell to the left of it
                 # If we are at the first row, we can only move right
                 if i == 0:
                     grid[i][j] += grid[i][j - 1]
