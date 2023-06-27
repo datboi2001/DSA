@@ -1,5 +1,8 @@
 class Solution:
     def buildArray(self, target: list[int], n: int) -> list[str]:
+        """
+        """
+
         index = 0
         result = []
 
