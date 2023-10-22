@@ -17,7 +17,7 @@
 
 import random
 import string
-
+from heapq import heapify, heappop, heappush
 
 
 
@@ -101,5 +101,32 @@ for i in range(100):
         lst.append(''.join(random.choices(string.ascii_lowercase, k=5))) 
 
 
-print(lst)
-print(mixed_merge_sort(lst))
+def mixed_heap_sort(lst: list[int | str]) -> list[int | str]:
+    """
+    :param lst: list of integers and strings
+    :return: sorted list of integers and strings
+    """
+    # Extract the integers from the list
+    ints = []
+    strs= []
+    for i in lst:
+        if type(i) is int:
+            ints.append(i)
+        else:
+            strs.append(i)
+    # Sort the integers
+    heapify(ints)
+    # Sort the strings
+    heapify(strs)
+    # Merge the sorted integers and strings
+    lst = []
+    while ints:
+        lst.append(heappop(ints))
+    while strs:
+        lst.append(heappop(strs))
+    return lst
+# Time Complexity: O(nlogn)
+# Space Complexity: O(n)
+
+print(f"{lst=}")
+print(f"{mixed_heap_sort(lst)=}")
